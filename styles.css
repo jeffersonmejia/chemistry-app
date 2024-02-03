@@ -165,11 +165,11 @@ input:focus + label {
 	margin-bottom: 0.5rem;
 }
 .procedure-container :is(h2, h3) {
-	color: var(--title-1-color);
+	color: rgb(37, 37, 37);
 }
 
 .procedure-container p {
-	color: var(--paragraph-color);
+	color: rgb(82, 82, 82);
 	font-size: 0.9rem;
 	text-align: justify;
 }
@@ -183,12 +183,16 @@ table :is(tr, td, th) {
 table tr {
 	text-align: center;
 	font-size: 0.9rem;
+	color: rgb(82, 82, 82);
 }
 
 .procedure-container article {
 	display: flex;
 	flex-direction: column;
 	gap: 0.2rem;
+	background-color: white;
+	padding: 0.5rem;
+	border-radius: 4px;
 }
 
 .fraction-container {
@@ -218,4 +222,33 @@ table tr {
 
 .visibility-off {
 	visibility: hidden;
+}
+@media screen and (min-width: 850px) {
+	main {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 27% 70%;
+		gap: 1rem;
+	}
+	.procedure-container {
+		width: 100%;
+		max-width: none;
+		grid-column: 2/-1;
+		margin-top: 1.5rem;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.procedure-container :is(h2, :nth-child(6), .group-button) {
+		grid-column: 1/-1;
+	}
+	.acid-form {
+		padding-left: 1.5rem;
+		align-self: flex-start;
+		position: sticky;
+		top: 12vh;
+	}
+	h1 {
+		grid-column: 1/-1;
+		margin-top: 1rem;
+	}
 }

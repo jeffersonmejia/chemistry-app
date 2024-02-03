@@ -236,9 +236,18 @@ table tr {
 		grid-column: 2/-1;
 		margin-top: 1.5rem;
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 	}
-	.procedure-container :is(h2, :nth-child(6), .group-button) {
+	.procedure-container :is(tr, td, th) {
+		width: 120px;
+	}
+	.procedure-container article {
+		padding: 1.5rem;
+	}
+	.procedure-container h2 {
+		font-size: 1.35rem;
+	}
+	.procedure-container :is(h2, :nth-child(2), :nth-child(6), .group-button) {
 		grid-column: 1/-1;
 	}
 	.acid-form {
@@ -249,6 +258,6 @@ table tr {
 	}
 	h1 {
 		grid-column: 1/-1;
-		margin-top: 1rem;
+		padding-bottom: 0;
 	}
 }

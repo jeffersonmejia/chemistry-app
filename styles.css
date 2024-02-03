@@ -12,6 +12,7 @@
 
 html {
 	font-family: 'Roboto', sans-serif;
+	width: 100%;
 }
 
 h1 {
@@ -122,12 +123,22 @@ input:focus + label {
 	margin-bottom: 2rem;
 }
 
+.procedure-container h2 {
+	font-size: 1.2rem;
+}
+
+.procedure-container h3 {
+	font-size: 1.1rem;
+	font-weight: 400;
+}
 .procedure-container :is(h2, h3) {
 	color: var(--title-1-color);
 }
 
 .procedure-container p {
 	color: var(--paragraph-color);
+	font-size: 1rem;
+	text-align: justify;
 }
 
 .procedure-container article {

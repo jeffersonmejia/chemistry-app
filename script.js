@@ -188,7 +188,7 @@ function SQRTproduct(number) {
 
 function calculateAccurance(SQRT) {
 	const result = (SQRT / acidMolar) * 100,
-		rounded = result.toFixed(3)
+		rounded = result.toFixed(7)
 
 	$accurancePercent.innerText = `${rounded}%`
 }

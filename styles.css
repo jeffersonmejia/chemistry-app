@@ -182,6 +182,29 @@ input.shake {
 input.shake + label {
 	color: red;
 }
+
+.procedure-container .accurance-less-five {
+	background-color: rgb(234, 255, 234);
+}
+
+.procedure-container .accurance-less-five h3 {
+	color: green;
+}
+.procedure-container .accurance-less-five p {
+	color: rgb(90, 161, 90);
+}
+
+.procedure-container .accurance-more-five {
+	background-color: rgb(255, 238, 234);
+}
+
+.procedure-container .accurance-more-five h3 {
+	color: rgb(128, 0, 0);
+}
+.procedure-container .accurance-more-five p {
+	color: rgb(161, 90, 90);
+}
+
 .procedure-container,
 .next-step-button,
 .no-data-section {

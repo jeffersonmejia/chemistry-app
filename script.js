@@ -67,6 +67,43 @@ function updateConstantKValues() {
 	})
 }
 
+function convertExponentUnicodeToNumber(exponentUnicode) {
+	const unicodeToDigitMap = {
+		'⁰': 0,
+		'¹': 1,
+		'²': 2,
+		'³': 3,
+		'⁴': 4,
+		'⁵': 5,
+		'⁶': 6,
+		'⁷': 7,
+		'⁸': 8,
+		'⁹': 9,
+		'¯¹': -1,
+		'¯²': -2,
+		'¯³': -3,
+		'¯⁴': -4,
+		'¯⁵': -5,
+		'¯⁶': -6,
+		'¯⁷': -7,
+		'¯⁸': -8,
+		'¯⁹': -9,
+	}
+	let result = parseInt(unicodeToDigitMap[exponentUnicode])
+	return result
+}
+
+function productConstantByPolar() {
+	const exponentRegex = /x10(.+)/,
+		exponentString = acidConstant.match(exponentRegex)[1],
+		integerRegex = /^(.+?)x10/,
+		integerNumber = parseInt(acidConstant.match(integerRegex)[1]),
+		exponent = convertExponentUnicodeToNumber(exponentString)
+	const molarValue = Math.pow(integerNumber * 10, exponent)
+	console.log(molarValue)
+	// const result  =  acidMolar
+}
+
 function calculateEquilibrium() {
 	if ($acidName.value > 0) {
 		const $acidNameSelected = $acidName.querySelector(
@@ -75,12 +112,12 @@ function calculateEquilibrium() {
 		acidName = $acidNameSelected.dataset.form
 		acidMolar = $acidMolar.value
 		acidConstant = $acidNameSelected.dataset.acid
-		console.log(acidConstant)
 	}
 	updateReaction()
 	updateIonsValue()
 	updateMolarValues()
 	updateConstantKValues()
+	productConstantByPolar()
 }
 
 d.addEventListener('click', (e) => {

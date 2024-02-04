@@ -194,6 +194,7 @@ function toggleSection() {
 	}, 300)
 	setTimeout(() => {
 		$procedureSection.style.opacity = 1
+		$nextButton.classList.remove('hidden')
 	}, 400)
 }
 

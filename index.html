@@ -32,7 +32,7 @@
 			<form class="acid-form">
 				<fieldset>
 					<legend>Datos</legend>
-					<select name="" id="">
+					<select name="" id="select-acid">
 						<option value="0">Selecciona un ácido</option>
 						<option value="6" data-acid="4.2x10¯⁷" data-base="2.4x10¯⁸" data-form="H2CO3">
 							Ácido carbónico (H2CO3)
@@ -89,7 +89,7 @@
 					</select>
 
 					<div class="group-input">
-						<input type="text" autocomplete="off" maxlength="16" />
+						<input type="text" autocomplete="off" maxlength="16" id="molar-input" />
 						<label for="">Molaridad </label>
 					</div>
 				</fieldset>
@@ -98,7 +98,7 @@
 					<input type="submit" value="Calcular" id="submit-acid-form" />
 				</div>
 			</form>
-			<section class="procedure-container">
+			<section class="procedure-container hidden">
 				<h2>Procedimiento#1</h2>
 				<article>
 					<h3>1. Equilibrio reaccion</h3>
@@ -159,21 +159,36 @@
 						<span data-result-molar-product> 4.8x10¯⁹</span>
 					</p>
 					<p>√x²=√<span data-result-molar-product>4.8x10¯⁹</span></p>
-					<p>x =6.9x10¯⁵</p>
+					<p>x =<span data-sqrt-result="">6.9x10¯⁵</span></p>
 				</article>
 				<article>
 					<h3>3. Realizar aproximacion</h3>
 					<div class="fraction-container">
 						<p>% =</p>
-						<p>6.9x10¯⁵</p>
+						<p data-sqrt-result>6.9x10¯⁵</p>
 						<p data-molar-value="">0.05</p>
 						<div>
-							<p>= 0.14% < 5%</p>
+							<p>x100%=0.014<5%</p>
 						</div>
 					</div>
 				</article>
 			</section>
-			<span class="material-symbols-outlined next-step-button"> arrow_forward_ios </span>
+			<section class="no-data-section">
+				<article>
+					<figure>
+						<img src="img/no-data-image.png" alt="" />
+						<figcaption>
+							<h4>
+								<span> Sin datos... </span>
+								<span> Selecciona el acido para empezar </span>
+							</h4>
+						</figcaption>
+					</figure>
+				</article>
+			</section>
+			<span class="material-symbols-outlined next-step-button hidden">
+				arrow_forward_ios
+			</span>
 		</main>
 		<script src="script.js"></script>
 	</body>

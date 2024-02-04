@@ -154,7 +154,60 @@ input:focus + label {
 	gap: 1rem;
 	margin-bottom: 2rem;
 }
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	25%,
+	75% {
+		transform: translateX(-5px);
+	}
+	50% {
+		transform: translateX(5px);
+	}
+}
 
+.shake {
+	animation: shake 0.5s ease-in-out;
+	color: red;
+	border: 1px solid red;
+}
+
+input.shake {
+	color: red;
+	border: 1px solid red;
+}
+
+input.shake + label {
+	color: red;
+}
+.procedure-container,
+.next-step-button,
+.no-data-section {
+	transition: opacity 0.3s ease-in-out;
+}
+.no-data-section {
+	display: flex;
+	border: 1px solid rgb(235, 235, 235);
+	border-radius: 4px;
+	background-color: rgb(245, 245, 245);
+	padding: 1rem;
+	flex-direction: column;
+	align-items: center;
+}
+.no-data-section h4 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.2rem;
+	color: var(--title-2-color);
+	text-align: center;
+	padding-bottom: 1rem;
+}
+.no-data-section h4 span:last-of-type {
+	font-weight: 400;
+}
 .procedure-container h2 {
 	font-size: 1.2rem;
 }
@@ -240,6 +293,10 @@ table tr {
 .visibility-off {
 	visibility: hidden;
 }
+.opacity-off {
+	opacity: 0;
+}
+
 @media screen and (min-width: 850px) {
 	main {
 		width: 100%;
@@ -293,4 +350,7 @@ table tr {
 		display: block;
 		padding-right: 1rem;
 	}
+}
+.hidden {
+	display: none;
 }

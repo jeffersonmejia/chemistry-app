@@ -6,7 +6,14 @@ const d = document,
 	$productNewIons = d.querySelectorAll('[data-new-ion]'),
 	$dataMolarValues = d.querySelectorAll('[data-molar-value]'),
 	$constantKAcidValues = d.querySelectorAll('[data-k-acid]'),
-	$resultsMolarProduct = d.querySelectorAll('[data-result-molar-product]')
+	$resultsMolarProduct = d.querySelectorAll('[data-result-molar-product]'),
+	$sqrtResults = d.querySelectorAll('[data-sqrt-result]'),
+	$section = d.querySelector('section'),
+	$nextButton = d.querySelector('.next-step-button'),
+	$noDataSection = d.querySelector('.no-data-section'),
+	$procedureSection = d.querySelector('.procedure-container'),
+	$molarInput = d.getElementById('molar-input'),
+	$selectAcid = d.getElementById('select-acid')
 
 const unicodeToDigitMap = {
 	'⁰': 0,
@@ -142,8 +149,11 @@ function formatScientificNotation(scientific) {
 	const parts = scientific.toString().split('e'),
 		integer = parts[0],
 		exponent = parts[1],
-		round = Math.round(integer * 1000) / 1000,
-		newString = `${round}x10${digitMapToUnicodeReversed[exponent]}`
+		round = Math.round(integer * 1000) / 1000
+	let newString = `${round}x10`
+	if (digitMapToUnicodeReversed[exponent]) {
+		newString += `${digitMapToUnicodeReversed[exponent]}`
+	}
 	return newString
 }
 
@@ -156,31 +166,63 @@ function productConstantByMolar() {
 	let constantKAcid = (integerNumber * 10) ** exponent
 	constantKAcid = constantKAcid.toExponential(2)
 
-	let result = (constantKAcid * acidMolar).toExponential(3),
-		resultScientific = formatScientificNotation(result)
+	let resultProduct = (constantKAcid * acidMolar).toExponential(3),
+		resultScientific = formatScientificNotation(resultProduct)
 
-	console.log($resultsMolarProduct)
 	$resultsMolarProduct.forEach((result) => {
 		result.innerText = resultScientific
 	})
+	// console.log(resultProduct)
+	return resultProduct
+}
+
+function SQRTproduct(number) {
+	const result = Math.sqrt(number).toExponential(3),
+		sciencific = formatScientificNotation(result)
+	$sqrtResults.forEach((el) => {
+		el.innerText = sciencific
+	})
+	return result
+}
+
+function toggleSection() {
+	$noDataSection.style.opacity = 0
+	$procedureSection.style.opacity = 0
+	setTimeout(() => {
+		$noDataSection.classList.add('hidden')
+		$procedureSection.classList.remove('hidden')
+	}, 300)
+	setTimeout(() => {
+		$procedureSection.style.opacity = 1
+	}, 400)
 }
 
 function calculateEquilibrium() {
-	if ($acidName.value > 0) {
+	if ($acidName.value > 0 && $molarInput.value.length > 0) {
+		toggleSection()
 		const $acidNameSelected = $acidName.querySelector(
 			`option[value="${$acidName.value}"]`
 		)
 		acidName = $acidNameSelected.dataset.form
 		acidMolar = $acidMolar.value
 		acidConstant = $acidNameSelected.dataset.acid
+		updateReaction()
+		updateIonsValue()
+		updateMolarValues()
+		updateConstantKValues()
+		const resultProduct = productConstantByMolar()
+		const SQRT = SQRTproduct(resultProduct)
+	} else if ($selectAcid.value == 0) {
+		$selectAcid.classList.add('shake')
+	} else if (!$molarInput.value.length > 0) {
+		$molarInput.classList.add('shake')
 	}
-	updateReaction()
-	updateIonsValue()
-	updateMolarValues()
-	updateConstantKValues()
-	productConstantByMolar()
+	setTimeout(() => {
+		$selectAcid.classList.remove('shake')
+		$molarInput.classList.remove('shake')
+	}, 700)
 }
-
+console.log($selectAcid.value)
 d.addEventListener('click', (e) => {
 	if (e.target.matches('#submit-acid-form')) {
 		e.preventDefault()

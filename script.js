@@ -5,7 +5,73 @@ const d = document,
 	$reactivesName = d.querySelectorAll('[data-reactive-name]'),
 	$productNewIons = d.querySelectorAll('[data-new-ion]'),
 	$dataMolarValues = d.querySelectorAll('[data-molar-value]'),
-	$constantKAcidValues = d.querySelectorAll('[data-k-acid]')
+	$constantKAcidValues = d.querySelectorAll('[data-k-acid]'),
+	$resultsMolarProduct = d.querySelectorAll('[data-result-molar-product]')
+
+const unicodeToDigitMap = {
+	'⁰': 0,
+	'¹': 1,
+	'²': 2,
+	'³': 3,
+	'⁴': 4,
+	'⁵': 5,
+	'⁶': 6,
+	'⁷': 7,
+	'⁸': 8,
+	'⁹': 9,
+	'¯¹': -1,
+	'¯²': -2,
+	'¯³': -3,
+	'¯⁴': -4,
+	'¯⁵': -5,
+	'¯⁶': -6,
+	'¯⁷': -7,
+	'¯⁸': -8,
+	'¯⁹': -9,
+	'¯⁹': -9,
+	'¯¹⁰': -10,
+	'¯¹¹': -11,
+	'¯¹²': -12,
+	'¯¹³': -13,
+	'¯¹⁴': -14,
+	'¯¹⁵': -15,
+	'¯¹⁶': -16,
+	'¯¹⁷': -17,
+	'¯¹⁸': -18,
+	'¯¹⁹': -19,
+}
+
+const digitMapToUnicodeReversed = {
+	0: '⁰',
+	1: '¹',
+	2: '²',
+	3: '³',
+	4: '⁴',
+	5: '⁵',
+	6: '⁶',
+	7: '⁷',
+	8: '⁸',
+	9: '⁹',
+	'-1': '¯¹',
+	'-2': '¯²',
+	'-3': '¯³',
+	'-4': '¯⁴',
+	'-5': '¯⁵',
+	'-6': '¯⁶',
+	'-7': '¯⁷',
+	'-8': '¯⁸',
+	'-9': '¯⁹',
+	'-10': '¯¹⁰',
+	'-11': '¯¹¹',
+	'-12': '¯¹²',
+	'-13': '¯¹³',
+	'-14': '¯¹⁴',
+	'-15': '¯¹⁵',
+	'-16': '¯¹⁶',
+	'-17': '¯¹⁷',
+	'-18': '¯¹⁸',
+	'-19': '¯¹⁹',
+}
 
 let acidName = null,
 	acidMolar = null,
@@ -68,40 +134,35 @@ function updateConstantKValues() {
 }
 
 function convertExponentUnicodeToNumber(exponentUnicode) {
-	const unicodeToDigitMap = {
-		'⁰': 0,
-		'¹': 1,
-		'²': 2,
-		'³': 3,
-		'⁴': 4,
-		'⁵': 5,
-		'⁶': 6,
-		'⁷': 7,
-		'⁸': 8,
-		'⁹': 9,
-		'¯¹': -1,
-		'¯²': -2,
-		'¯³': -3,
-		'¯⁴': -4,
-		'¯⁵': -5,
-		'¯⁶': -6,
-		'¯⁷': -7,
-		'¯⁸': -8,
-		'¯⁹': -9,
-	}
 	let result = parseInt(unicodeToDigitMap[exponentUnicode])
 	return result
 }
 
-function productConstantByPolar() {
+function formatScientificNotation(scientific) {
+	const parts = scientific.toString().split('e'),
+		integer = parts[0],
+		exponent = parts[1],
+		round = Math.round(integer * 1000) / 1000,
+		newString = `${round}x10${digitMapToUnicodeReversed[exponent]}`
+	return newString
+}
+
+function productConstantByMolar() {
 	const exponentRegex = /x10(.+)/,
 		exponentString = acidConstant.match(exponentRegex)[1],
 		integerRegex = /^(.+?)x10/,
-		integerNumber = parseInt(acidConstant.match(integerRegex)[1]),
+		integerNumber = parseFloat(acidConstant.match(integerRegex)[1]),
 		exponent = convertExponentUnicodeToNumber(exponentString)
-	const molarValue = Math.pow(integerNumber * 10, exponent)
-	console.log(molarValue)
-	// const result  =  acidMolar
+	let constantKAcid = (integerNumber * 10) ** exponent
+	constantKAcid = constantKAcid.toExponential(2)
+
+	let result = (constantKAcid * acidMolar).toExponential(3),
+		resultScientific = formatScientificNotation(result)
+
+	console.log($resultsMolarProduct)
+	$resultsMolarProduct.forEach((result) => {
+		result.innerText = resultScientific
+	})
 }
 
 function calculateEquilibrium() {
@@ -117,7 +178,7 @@ function calculateEquilibrium() {
 	updateIonsValue()
 	updateMolarValues()
 	updateConstantKValues()
-	productConstantByPolar()
+	productConstantByMolar()
 }
 
 d.addEventListener('click', (e) => {

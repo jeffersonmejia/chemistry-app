@@ -13,7 +13,8 @@ const d = document,
 	$noDataSection = d.querySelector('.no-data-section'),
 	$procedureSection = d.querySelector('.procedure-container'),
 	$molarInput = d.getElementById('molar-input'),
-	$selectAcid = d.getElementById('select-acid')
+	$selectAcid = d.getElementById('select-acid'),
+	$accurancePercent = d.querySelector('[data-accurance-percent]')
 
 const unicodeToDigitMap = {
 	'⁰': 0,
@@ -185,6 +186,13 @@ function SQRTproduct(number) {
 	return result
 }
 
+function calculateAccurance(SQRT) {
+	const result = (SQRT / acidMolar) * 100,
+		rounded = result.toFixed(3)
+
+	$accurancePercent.innerText = `${rounded}%`
+}
+
 function toggleSection() {
 	$noDataSection.style.opacity = 0
 	$procedureSection.style.opacity = 0
@@ -213,6 +221,8 @@ function calculateEquilibrium() {
 		updateConstantKValues()
 		const resultProduct = productConstantByMolar()
 		const SQRT = SQRTproduct(resultProduct)
+
+		calculateAccurance(SQRT)
 	} else if ($selectAcid.value == 0) {
 		$selectAcid.classList.add('shake')
 	} else if (!$molarInput.value.length > 0) {

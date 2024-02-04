@@ -164,13 +164,20 @@ input:focus + label {
 	font-weight: 400;
 	margin-bottom: 0.5rem;
 }
-.procedure-container :is(h2, h3) {
-	color: rgb(37, 37, 37);
+.procedure-container :is(h2) {
+	color: var(--title-1-color);
 }
 
-.procedure-container p {
+.procedure-container h3 {
 	color: rgb(82, 82, 82);
+}
+
+.procedure-container small {
+	color: red;
+}
+.procedure-container p {
 	font-size: 0.9rem;
+	color: gray;
 	text-align: justify;
 }
 
@@ -183,7 +190,7 @@ table :is(tr, td, th) {
 table tr {
 	text-align: center;
 	font-size: 0.9rem;
-	color: rgb(82, 82, 82);
+	color: gray;
 }
 
 .procedure-container article {
@@ -198,7 +205,13 @@ table tr {
 .fraction-container {
 	width: fit-content;
 	display: grid;
-	grid-template-columns: fit-content 1fr;
+	grid-template-columns: auto repeat(2, 1fr);
+}
+.fraction-container div {
+	grid-column: 3/4;
+	grid-row: 1/3;
+	display: grid;
+	place-content: center;
 }
 
 .fraction-container p:nth-child(1) {
@@ -219,7 +232,11 @@ table tr {
 	text-align: center;
 	border-top: 1px solid rgb(200, 200, 200);
 }
-
+.next-step-button {
+	display: none;
+	cursor: pointer;
+	color: gray;
+}
 .visibility-off {
 	visibility: hidden;
 }
@@ -227,13 +244,13 @@ table tr {
 	main {
 		width: 100%;
 		display: grid;
-		grid-template-columns: 27% 70%;
+		grid-template-columns: 25% 69% auto;
 		gap: 1rem;
 	}
 	.procedure-container {
 		width: 100%;
 		max-width: none;
-		grid-column: 2/-1;
+		grid-column: 2/3;
 		margin-top: 1.5rem;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
@@ -247,7 +264,8 @@ table tr {
 	.procedure-container h2 {
 		font-size: 1.35rem;
 	}
-	.procedure-container :is(h2, :nth-child(2), :nth-child(6), .group-button) {
+	.procedure-container
+		:is(h2, article:first-of-type, article:nth-of-type(5), .group-button) {
 		grid-column: 1/-1;
 	}
 	.acid-form {
@@ -259,5 +277,14 @@ table tr {
 	h1 {
 		grid-column: 1/-1;
 		padding-bottom: 0;
+	}
+	.procedure-container {
+		margin-bottom: 0;
+	}
+	.next-step-button {
+		grid-column: 3/4;
+		grid-row: 2/4;
+		display: block;
+		padding-right: 1rem;
 	}
 }

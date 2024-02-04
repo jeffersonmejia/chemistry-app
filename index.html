@@ -20,6 +20,10 @@
 			href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;700&display=swap"
 			rel="stylesheet"
 		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+		/>
 		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
@@ -105,7 +109,7 @@
 				</div>
 			</form>
 			<section class="procedure-container">
-				<h2>Procedimientos</h2>
+				<h2>Procedimiento</h2>
 				<article>
 					<h3>1. Equilibrio reaccion#1</h3>
 					<table class="procedure-font">
@@ -150,11 +154,11 @@
 						<p><span data-k-acid> 9.5x10¯⁸ </span> =</p>
 						<p>x²</p>
 						<p><span data-molar-value>0.05</span>-x</p>
-					</div>
-					<div class="fraction-container">
-						<p>... ≈</p>
-						<p>x²</p>
-						<p data-molar-value>0.05</p>
+						<div>
+							<p>≈</p>
+							<p>x²</p>
+							<p data-molar-value>0.05</p>
+						</div>
 					</div>
 				</article>
 				<article>
@@ -172,19 +176,15 @@
 						<p>% =</p>
 						<p>6.9x10¯⁵</p>
 						<p data-molar-value="">0.05</p>
+						<div>
+							<p>= 0.14%</p>
+						</div>
 					</div>
-					<p>% = 0.00138x100%</p>
-					<p>% = 0.14%</p>
+					<p>0.14% < 5%</p>
+					<small>No requiere Ec. cuadratica</small>
 				</article>
-				<article>
-					<h3>4. Analisis aproximacion</h3>
-					<p>0.14% < 5% = No requiere Ec. cuadratica</p>
-				</article>
-				<div class="group-button">
-					<button class="prev-button visibility-off">Anterior</button>
-					<button class="next-button">Siguiente</button>
-				</div>
 			</section>
+			<span class="material-symbols-outlined next-step-button"> arrow_forward_ios </span>
 		</main>
 		<script src="script.js"></script>
 	</body>
